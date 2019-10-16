@@ -20,7 +20,6 @@ def user(): #Najde ime v stoplcih iz vrne vrstico
             if cell.value == name.upper():
                 return (index +1)
                 print(index+1)
-    pass
 row = user()
 start_cell = 'E{}'.format(row)
 end_cell = 'AH{}'.format(row)
@@ -32,7 +31,7 @@ def read_shift():   #Preberi izmene v seznam
         for c_val in c1:
             my_list.append(c_val.value)
     return my_list
-    pass
+
 shift_list = read_shift()
 
 def dopust(): #Sivo obarvane celice so prosti dnevi
@@ -42,9 +41,8 @@ def dopust(): #Sivo obarvane celice so prosti dnevi
         for fraj in c2:
             fraj_list.append(fraj.value)
     return fraj_list
-    pass
-fraj_list = dopust()
 
+fraj_list = dopust()
 
 def working_days(): #Vnese dopust v seznam s šihti
     oznake_dopust = ['LD','KU','PO','IZPIT','PP','B']
@@ -52,8 +50,9 @@ def working_days(): #Vnese dopust v seznam s šihti
         if shift in oznake_dopust:
             shift_list.pop(day)
             shift_list.insert(day,'None')
-    pass
+
 working_days()
+
 def read_days(): #Preberi vrstni red dni v seznam
     days_list = []
     cell = sheet['E2':'AH2']
@@ -61,7 +60,7 @@ def read_days(): #Preberi vrstni red dni v seznam
         for c_val in c1:
             days_list.append(c_val.value)
     return days_list
-    pass
+
 days_list = read_days()
 
 def month(): #Preberi mesec
@@ -70,7 +69,6 @@ def month(): #Preberi mesec
     for month,date in months.items():
         if month == cell.lower():
             return date
-    pass
 
 def vodja_odkrivanje(): #Preberi barve fonta za odkrivanje in vodje v seznam
     vodja_list = []
@@ -82,7 +80,6 @@ def vodja_odkrivanje(): #Preberi barve fonta za odkrivanje in vodje v seznam
             else:
                 vodja_list.append('Fraj')
     return vodja_list
-    pass
 
 def duration(day): #Kombinacija treh seznamov za določanje začetka in konca službe (h1,m1,h2,m2)
     if shift_list[day]=='P':
@@ -109,14 +106,12 @@ def duration(day): #Kombinacija treh seznamov za določanje začetka in konca sl
         return(13,00,21,00)
     elif shift_list[day] =='C':
         return(9,00,20,00)
-    pass
 
 def koncni_seznam():
     koncni_seznam = ['Nicti_dan']
     for i in range(0, len(days_list)):
         koncni_seznam.append(duration(i))
     return koncni_seznam
-    pass
 
 shift_list = read_shift()
 working_days()
